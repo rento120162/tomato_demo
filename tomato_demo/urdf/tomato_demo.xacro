@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<robot name="tomato_demo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find tomato_demo)/urdf/materials.xacro" />
+<xacro:include filename="$(find tomato_demo)/urdf/tomato_demo.trans" />
+<xacro:include filename="$(find tomato_demo)/urdf/tomato_demo.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.20183562683084336 -0.023219598363527647 0.0007597407262746711" rpy="0 0 0"/>
+    <mass value="2.4437607527286107"/>
+    <inertia ixx="0.001888" iyy="0.008469" izz="0.009554" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link3_1">
+  <inertial>
+    <origin xyz="0.14312559111837414 0.22008308832266144 0.183042047068245" rpy="0 0 0"/>
+    <mass value="2.585838753027379"/>
+    <inertia ixx="0.013075" iyy="0.012554" izz="0.002231" ixy="0.0" iyz="0.000101" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.285751 0.243589 0.02505" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.285751 0.243589 0.02505" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link4_1">
+  <inertial>
+    <origin xyz="0.19637559111837424 -0.33523759836352857 -0.056469826785349314" rpy="0 0 0"/>
+    <mass value="2.428954061980038"/>
+    <inertia ixx="0.008977" iyy="0.000613" izz="0.009049" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.338751 -0.238418 -0.287339" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.338751 -0.238418 -0.287339" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link2_1">
+  <inertial>
+    <origin xyz="-0.0402174216430467 0.02903167586642213 0.0823100387473419" rpy="0 0 0"/>
+    <mass value="2.664224980782301"/>
+    <inertia ixx="0.012536" iyy="0.014653" izz="0.003056" ixy="-9e-06" iyz="9e-06" ixz="5.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.102875 0.05207 -0.01552" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.102875 0.05207 -0.01552" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find tomato_demo)/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Slider_Z" type="prismatic">
+  <origin xyz="-0.182876 -0.191519 -0.04057" rpy="0 0 0"/>
+  <parent link="link2_1"/>
+  <child link="link3_1"/>
+  <axis xyz="-0.0 0.0 -1.0"/>
+  <limit upper="0.0" lower="-0.1" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Slider_Y" type="prismatic">
+  <origin xyz="-0.053 0.482007 0.312389" rpy="0 0 0"/>
+  <parent link="link3_1"/>
+  <child link="link4_1"/>
+  <axis xyz="-0.0 -1.0 -0.0"/>
+  <limit upper="0.0" lower="-0.14" effort="100" velocity="100"/>
+</joint>
+
+<joint name="Slider_X" type="prismatic">
+  <origin xyz="-0.102875 -0.05207 0.01552" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="link2_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit upper="0.12" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+</robot>
